@@ -1,17 +1,19 @@
 <?php
-// verificar se o formulario foi acionado
+
+use ExemploCrud\Models\Fabricante;
+use ExemploCrud\Services\FabricanteServico;
+
+require_once "../vendor/autoload.php";
+
+$fabricanteServico = new FabricanteServico();
+
 if (isset($_POST['inserir'])) {
-
-    // acessando as funções do CRUD de fabricantes
-    require_once "../src/funcoes-fabricantes.php";
-
-    // capturando o nome digitado do novo fabricante
     $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
 
-    // inserindo o novo fabricante atraves de uma função
-    inserirFabricante($conexao, $nome);
+    $fabricante = new Fabricante($nome);
 
-    // redirecinando para a visualização atualizada
+    $fabricanteServico->inserir($fabricante);
+
     header("location:visualizar.php");
     exit;
 };
