@@ -2,7 +2,7 @@
 namespace ExemploCrud\Services;
 
 use Exception;
-use ExemploCrud\ConexaoBD;
+use ExemploCrud\Database\ConexaoBD;
 use PDO;
 use Throwable;
 
