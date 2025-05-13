@@ -53,10 +53,13 @@ final class FabricanteServico
             $consulta->bindValue(":id", $id, PDO::PARAM_INT);
             $consulta->execute();
 
-            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            // $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
 
             // se o resultado for verdadeiro, retornaremos ele. Senão, retornaremis null
-            return $resultado ? $resultado : null;
+            // return $resultado ? $resultado : null;
+
+            // Versão usando ternario simplificado usando 'elvis operator'
+            return $consulta->fetch(PDO::FETCH_ASSOC) ?: null;
         } catch (Throwable $erro) {
             throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
         }
