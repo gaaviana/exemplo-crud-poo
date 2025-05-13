@@ -1,11 +1,15 @@
 <?php
-require_once "../src/funcoes-produtos.php";
-require_once "../src/funcoes-utilitarias.php";
 
+use ExemploCrud\Services\FabricanteServico;
+use ExemploCrud\Services\ProdutoServico;
 
-$listaDeProdutos = listarProdutos($conexao);
+require_once "../vendor/autoload.php";
 
+$produtoServico = new ProdutoServico;
+$listaDeProdutos = $produtoServico->listarTodos();
 
+$fabricanteServico = new FabricanteServico;
+$listaDeFabricantes = $fabricanteServico->listarTodos();
 ?>
 
 <!DOCTYPE html>
@@ -32,11 +36,11 @@ $listaDeProdutos = listarProdutos($conexao);
             <?php foreach ($listaDeProdutos as $produto) { ?>
                 <div class="col-sm-6">
                     <article class="bg-body-secondary p-2">
-                        <h3><?= $produto['Produto'] ?></h3>
-                        <h4><?= $produto['Fabricante'] ?></h4>
-                        <p><b>Preço:</b> <?= formatarPreco($produto['Preço']) ?></p>
-                        <p><b>Qtd:</b> <?= $produto['Quantidade'] ?></p>
-                        <p> <b>Total: </b><?= total($produto['Preço'], $produto['Quantidade']) ?></p>
+                        <h3><?= $produto['produto'] ?></h3>
+                        <h4><?= $produto['fabricante'] ?></h4>
+                        <p><b>Preço:</b> <?= $produto['preco'] ?></p>
+                        <p><b>Qtd:</b> <?= $produto['quantidade'] ?></p>
+                        <p> <b>Total: </b><?= $produto['preco'], $produto['quantidade'] ?></p>
 
                         <a class="btn btn-warning btn-sm" href="atualizar.php?id=<?=$produto['id']?>">Atualizar</a>
                         <a class="btn btn-danger btn-sm" href="excluir.php?id=<?=$produto['id']?>">excloe</a>
