@@ -1,13 +1,22 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
+
+use ExemploCrud\Services\FabricanteServico;
+
+require_once "../vendor/autoload.php";
 
 //  obtendo o valor do parametro via URL
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
 //  chamando a função para carregar os dados de um fabricante
-$fabricante = listarUmFabricante($conexao, $id);
+$fabricanteServico = new FabricanteServico();
 
+$fabricantesDados = $fabricanteServico->buscarPorId($id);
 // verificar se o formulario de atualização foi acionado
+
+echo "<pre>";
+var_dump($fabricantesDados);
+echo "</pre>";
+
 if (isset($_POST['atualizar'])) {
     $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
 

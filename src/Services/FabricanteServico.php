@@ -64,4 +64,6 @@ final class FabricanteServico
             throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
         }
     }
+
+    
 }
