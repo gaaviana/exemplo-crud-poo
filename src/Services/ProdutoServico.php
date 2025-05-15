@@ -88,8 +88,7 @@ final class ProdutoServico
 
             $consulta->execute();
         } catch (Throwable $erro) {
-            throw new Exception("Error Processing Request", 1);
-            ("Erro ao carregar fabricante: " . $erro->getMessage());
+            throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
         }
     }
 

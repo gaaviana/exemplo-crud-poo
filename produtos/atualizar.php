@@ -1,7 +1,5 @@
 <?php
 
-use ExemploCrud\helpers\Utils;
-use ExemploCrud\Models\Fabricante;
 use ExemploCrud\Models\Produto;
 use ExemploCrud\Services\FabricanteServico;
 use ExemploCrud\Services\ProdutoServico;
@@ -13,7 +11,7 @@ $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 $produtoServico = new ProdutoServico;
 $produtoDados = $produtoServico->buscarPorId($id);
 
-$listaDeFabricantes = new FabricanteServico();
+$listaDeFabricanteServic = new FabricanteServico();
 $fabricantes = $listaDeFabricantes->listarTodos();
 
 if (isset($_POST['atualizar'])) {
