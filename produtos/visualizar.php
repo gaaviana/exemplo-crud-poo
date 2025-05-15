@@ -1,5 +1,6 @@
 <?php
 
+use ExemploCrud\helpers\Utils;
 use ExemploCrud\Services\FabricanteServico;
 use ExemploCrud\Services\ProdutoServico;
 
@@ -38,9 +39,9 @@ $listaDeFabricantes = $fabricanteServico->listarTodos();
                     <article class="bg-body-secondary p-2">
                         <h3><?= $produto['produto'] ?></h3>
                         <h4><?= $produto['fabricante'] ?></h4>
-                        <p><b>Preço:</b> <?= $produto['preco'] ?></p>
+                        <p><b>Preço:</b> <?= Utils::formatarPreco($produto['preco']) ?></p>
                         <p><b>Qtd:</b> <?= $produto['quantidade'] ?></p>
-                        <p> <b>Total: </b><?= $produto['preco'], $produto['quantidade'] ?></p>
+                        <p> <b>Total: </b><?= Utils::total($produto['preco'], $produto['quantidade'])  ?></p>
 
                         <a class="btn btn-warning btn-sm" href="atualizar.php?id=<?=$produto['id']?>">Atualizar</a>
                         <a class="btn btn-danger btn-sm" href="excluir.php?id=<?=$produto['id']?>">excloe</a>

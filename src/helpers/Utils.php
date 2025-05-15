@@ -4,13 +4,21 @@ namespace ExemploCrud\helpers;
 use Throwable;
 
 final class Utils {
-    // usando o construtor privado e vazio bloqueamos a criação de objetos/instancias
+
     private function __construct() { }
 
-    public static function dump(mixed $dados):void {
+    public static function dump(mixed $dados): void {
         echo "<pre>";
-        echo var_dump($dados);
+        var_dump($dados);
         echo "</pre>";
     }
+
+    public static function formatarPreco(float $valor): string {
+        return 'R$ ' . number_format($valor, 2, ',', '.');
+    }
+
+    public static function total(float $valor, int $qtd): string {
+        $calcular = $valor * $qtd;
+        return self::formatarPreco($calcular);
+    }
 }
-?>
