@@ -65,35 +65,34 @@ final class FabricanteServico
         }
     }
 
-    public function atualizar(Fabricante $fabricante):void {
-         $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+    public function atualizar(Fabricante $fabricante): void
+    {
+        $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
 
-    try {
-        $consulta = $this->conexao->prepare($sql);
+        try {
+            $consulta = $this->conexao->prepare($sql);
 
-        $consulta->bindValue(":nome", $fabricante->getNome(), PDO::PARAM_STR_CHAR);  
-        $consulta->bindValue(":id", $fabricante->getId(), PDO::PARAM_INT);
+            $consulta->bindValue(":nome", $fabricante->getNome(), PDO::PARAM_STR_CHAR);
+            $consulta->bindValue(":id", $fabricante->getId(), PDO::PARAM_INT);
 
-        $consulta->execute();
-
-    } catch (Throwable $erro) {
-        throw new Exception("Error Processing Request", 1);
-        ("Erro ao carregar fabricante: ".$erro->getMessage());
+            $consulta->execute();
+        } catch (Throwable $erro) {
+            throw new Exception("Error Processing Request", 1);
+            ("Erro ao carregar fabricante: " . $erro->getMessage());
+        }
     }
-    }
 
-    public function excluir(int $id):void 
+    public function excluir(int $id): void
     {
         $sql = "DELETE FROM fabricantes WHERE id = :id";
 
-         try {
-        $consulta = $this->conexao->prepare($sql);
-        $consulta->bindValue(":id", $id, PDO::PARAM_INT);
-        $consulta->execute();
- 
-    } catch (Throwable $erro) {
-        throw new Exception("Error Processing Request", 1);
-        ("Erro ao excluir fabricante: ".$erro->getMessage());
-    }
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Throwable $erro) {
+            throw new Exception("Error Processing Request", 1);
+            ("Erro ao excluir fabricante: " . $erro->getMessage());
+        }
     }
 }

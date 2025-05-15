@@ -55,4 +55,40 @@ final class ProdutoServico
             throw new Exception("Erro: " . $erro->getMessage());
         }
     }
+
+    public function buscarPorId(int $id): ?array
+    {
+        $sql = "SELECT * FROM produtos WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+
+            $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+            $consulta->execute();
+
+            return $consulta->fetch(PDO::FETCH_ASSOC) ?: null;
+        } catch (Throwable $erro) {
+            throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
+        }
+    }
+
+    public function atualizar(Produto $produto): void
+    {
+        $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+
+            $consulta->bindValue(":nome", $produto->getNome());
+            $consulta->bindValue(":preco", $produto->getPreco());
+            $consulta->bindValue(":quantidade", $produto->getQuantidade());
+            $consulta->bindValue(":fabricante_id", $produto->getFabricanteId());
+            $consulta->bindValue(":descricao", $produto->getDescricao());
+
+            $consulta->execute();
+        } catch (Throwable $erro) {
+            throw new Exception("Error Processing Request", 1);
+            ("Erro ao carregar fabricante: " . $erro->getMessage());
+        }
+    }
 }
