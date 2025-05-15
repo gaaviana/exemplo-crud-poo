@@ -1,11 +1,17 @@
 <?php
-require_once "../src/funcoes-produtos.php";
+
+use ExemploCrud\Services\ProdutoServico;
+
+require_once "../vendor/autoload.php";
 
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
+$produtoServico = new ProdutoServico;
+
+
 // vereficando se houve o sim para excluir
 if(isset($_GET['confirmar'])){
-    excluirProduto($conexao, $id);
+    $produtoServico->excluir($id);
 
     header("location:visualizar.php");
     exit;

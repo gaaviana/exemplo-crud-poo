@@ -74,7 +74,7 @@ final class ProdutoServico
 
     public function atualizar(Produto $produto): void
     {
-        $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+        $sql = "UPDATE produtos SET nome = :nome, preco = :preco, quantidade = :quantidade, fabricante_id = :fabricante_id, descricao = :descricao WHERE id = :id";
 
         try {
             $consulta = $this->conexao->prepare($sql);
@@ -84,11 +84,26 @@ final class ProdutoServico
             $consulta->bindValue(":quantidade", $produto->getQuantidade());
             $consulta->bindValue(":fabricante_id", $produto->getFabricanteId());
             $consulta->bindValue(":descricao", $produto->getDescricao());
+            $consulta->bindValue(":id", $produto->getId());
 
             $consulta->execute();
         } catch (Throwable $erro) {
             throw new Exception("Error Processing Request", 1);
             ("Erro ao carregar fabricante: " . $erro->getMessage());
+        }
+    }
+
+    public function excluir(int $id): void
+    {
+        $sql = "DELETE FROM produtos WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Throwable $erro) {
+            throw new Exception("Error Processing Request", 1);
+            ("Erro ao excluir fabricante: " . $erro->getMessage());
         }
     }
 }

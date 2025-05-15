@@ -23,8 +23,9 @@ if (isset($_POST['atualizar'])) {
     $idFabricante = filter_input(INPUT_POST, "fabricante", FILTER_SANITIZE_NUMBER_INT);
     $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_SPECIAL_CHARS);
 
-    $produto = new Produto($nome, $preco, $quantidade, $idFabricante, null, $descricao);
+    $produto = new Produto($nome, $preco, $quantidade, $idFabricante, $id, $descricao);
 
+    $produtoServico->atualizar($produto);
     header("location:visualizar.php");
     exit;
 }
